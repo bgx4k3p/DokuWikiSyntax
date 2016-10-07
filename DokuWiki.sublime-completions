@@ -1,0 +1,25 @@
+{
+    "scope": "text.dokuwiki - source - meta.tag, punctuation.definition.tag.begin",
+
+    "completions":
+    [
+        { "trigger": "wtitle", "contents": "====== $0 ======" },
+        { "trigger": "wh1", "contents": "====== $0 ======" }, 
+        { "trigger": "wh2", "contents": "===== $0 =====" },  
+        { "trigger": "wh3", "contents": "==== $0 ====" },   
+        { "trigger": "wh4", "contents": "=== $0 ===" },
+        { "trigger": "wh5", "contents": "== $0 ==" },
+        { "trigger": "wb", "contents": "**$0**" },
+        { "trigger": "wu", "contents": "__$0__" },
+        { "trigger": "wi", "contents": "//$0//" },
+        { "trigger": "wbu", "contents": "__**$0**__" },
+        { "trigger": "wtag", "contents": "{{tag>$0}}" },
+        { "trigger": "wcode", "contents": "<code>$0</code>" },    
+        { "trigger": "wps", "contents": "<file powershell>$0</file>" },
+        { "trigger": "wpy", "contents": "<file python>$0</file>" },
+        { "trigger": "wbash", "contents": "<file bash>$0</file>" },
+        { "trigger": "whtml", "contents": "<file html>$0</file>" },
+        { "trigger": "wbl", "contents": "  * $0" },
+        { "trigger": "wnl", "contents": "  - $0" },
+    ]
+}

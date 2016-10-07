@@ -1,0 +1,149 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: "DokuWiki"
+first_line_match: (^\={6}.*\={6}) # The first line of DukuWiki page should start with H1 heading, which is the title
+scope: text.dokuwiki
+uuid: c5fd5cfa-4839-40e5-87f6-fc7ef1d2f3cc
+
+contexts:
+  main:
+    # Page Title    
+    - match: '^======'
+      scope: acejump.label.blue
+      push:
+        - meta_scope: acejump.label.blue
+        - match: '======'
+          pop: true
+        - match: '.'
+          scope: acejump.label.blue
+
+    # Headings    
+    - match: '^=+'
+      scope: acejump.label.orange
+      push:
+        - meta_scope: acejump.label.orange
+        - match: '=+'
+          pop: true
+        - match: '.'
+          scope: acejump.label.orange
+
+    # Formatted Bold text    
+    - match: '\*\*'
+      scope: meta.tag
+      push:
+        - meta_scope: meta.tag
+        - match: '\*\*'
+          pop: true
+        - match: '.'
+          scope: markup.bold
+
+    # Formatted Italic text    
+    - match: (?<!https:|http:)\/\/  # This handles cases when there are urls, which breaks the highlighting
+      scope: meta.tag
+      push:
+        - meta_scope: meta.tag
+        - match: '\/\/'
+          pop: true
+        - match: '.'
+          scope: markup.italic
+
+    # Formatted Underlined text    
+    - match: '\_\_'
+      scope: meta.tag
+      push:
+        - meta_scope: meta.tag
+        - match: '\_\_'
+          pop: true
+        - match: '.'
+          scope: markup.underline
+
+    # Newline markup
+    - match: (\\\\)
+      push:
+        - meta_scope: meta.tag
+        - match: '\n'
+          scope: meta.tag
+          pop: true
+
+    # Cloud tags
+    - match: ({{/?)([a-zA-Z0-9:]+)
+      captures:
+        1: meta.tag
+        2: entity.name.tag
+      push:
+        - meta_scope: meta.tag
+        - match: '}}'
+          scope: meta.tag
+          pop: true
+        - include: tag-stuff
+        - match: '.'
+          scope: markup.inserted
+
+    # More Cloud tags
+    - match: (~~)
+      push:
+        - meta_scope: meta.tag
+        - match: '~~'
+          scope: meta.tag
+          pop: true
+        - match: '.'
+          scope: constant.character
+
+    # IndexMenu tags
+    - match: ({{indexmenu_n>)
+      push:
+        - meta_scope: meta.tag
+        - match: '}}'
+          scope: meta.tag
+          pop: true
+        - match: '.'
+          scope: constant.character
+
+    # Bulleted list
+    - match: (^\s+\*\s)
+      push:
+        - meta_scope: meta.tag
+        - match: '\n'
+          scope: meta.tag
+          pop: true
+        - match: '.'
+          scope: markup.inserted
+
+    # Numbered list
+    - match: (^\s+\-\s)
+      push:
+        - meta_scope: meta.tag
+        - match: '\n'
+          scope: meta.tag
+          pop: true
+        - match: '.'
+          scope: markup.inserted
+
+    # HTML Code tags
+    - match: '(?:^\s+)?(<)([a-zA-Z0-9:]+)\b(?![^>]*/>)'
+      captures:
+        1: punctuation.definition.tag.begin.html
+        2: entity.name.tag.other.html
+      push:
+        - match: '(</)(\2)(>)'
+          captures:
+            1: punctuation.definition.tag.begin.html
+            2: entity.name.tag.other.html
+            3: punctuation.definition.tag.end.html
+          pop: true
+        - match: '>'
+          scope: punctuation.definition.tag.end.html
+          push:
+            - match: '.'
+              scope: markup.changed.git_gutter
+          with_prototype:
+            - match: (?=</\2)
+              pop: true
+            - include: main
+        - match: '.'
+          scope: string.quoted.single.html
+
+
+
+
