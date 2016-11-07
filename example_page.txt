@@ -1,0 +1,35 @@
+====== PAGE TITLE ======
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae aliquam diam, vitae congue tellus. Phasellus mattis laoreet nisi nec tristique. Mauris congue rhoncus laoreet. Quisque fringilla pharetra nibh, at consequat justo congue at. Maecenas ornare mi vel porttitor fringilla. Quisque maximus lorem ut tellus ultricies, ut sagittis dui varius. Cras maximus fermentum mattis. Maecenas faucibus sodales 
+
+====== Heading 1 ======
+
+===== Heading 2 =====
+
+==== Heading 3 ====
+
+=== Heading 4 ===
+
+== Heading 5 ==
+
+
+**bold  text**
+//italic text//
+__underline__
+
+
+<file python script.py>
+Some code
+More code
+</file>
+
+
+  - numbered list item
+  - numbered list item
+  - numbered list item
+
+  * bullet list item
+  * bullet list item
+  * bullet list item
+
+  {{tag>some tags}}
