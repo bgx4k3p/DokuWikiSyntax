@@ -33,3 +33,9 @@ More code
   * bullet list item
 
   {{tag>some tags}}
+
+  {{ Image.jpeg|legend }}
+
+  [[https://www.example.com|link name]]
+
+This text checks if normal text color is back to normal :)

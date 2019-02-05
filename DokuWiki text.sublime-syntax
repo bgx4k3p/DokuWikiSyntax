@@ -90,6 +90,20 @@ contexts:
         - match: '.'
           scope: constant.character
 
+    # Links & URLs
+    - match: (\[\[/?)([a-zA-Z0-9:]+)
+      captures:
+        1: meta.tag
+        2: entity.name.tag
+      push:
+        - meta_scope: meta.tag
+        - match: '\]\]'
+          scope: meta.tag
+          pop: true
+        - include: tag-stuff
+        - match: '.'
+          scope: markup.inserted
+
     # IndexMenu tags
     - match: ({{indexmenu_n>)
       push:
