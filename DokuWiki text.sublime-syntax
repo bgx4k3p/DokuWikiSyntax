@@ -16,7 +16,7 @@ contexts:
         - match: '======'
           pop: true
         - match: '.'
-          scope: acejump.label.blue
+          scope: markup.heading entity.name.class
 
     # Headings    
     - match: '^=+'
@@ -26,7 +26,7 @@ contexts:
         - match: '=+'
           pop: true
         - match: '.'
-          scope: acejump.label.orange
+          scope: markup.heading entity.name.section
 
     # Formatted Bold text    
     - match: '\*\*'
@@ -67,7 +67,7 @@ contexts:
           pop: true
 
     # Cloud tags
-    - match: ({{/?)([a-zA-Z0-9:]+)
+    - match: ({{/?)([a-zA-Z0-9:\ ]+)
       captures:
         1: meta.tag
         2: entity.name.tag
@@ -89,6 +89,20 @@ contexts:
           pop: true
         - match: '.'
           scope: constant.character
+
+    # Links & URLs
+    - match: (\[\[/?)([a-zA-Z0-9:]+)
+      captures:
+        1: meta.tag
+        2: entity.name.tag
+      push:
+        - meta_scope: meta.tag
+        - match: '\]\]'
+          scope: meta.tag
+          pop: true
+        - include: tag-stuff
+        - match: '.'
+          scope: markup.inserted
 
     # IndexMenu tags
     - match: ({{indexmenu_n>)
