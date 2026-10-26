@@ -10,23 +10,25 @@ contexts:
   main:
     # Page Title    
     - match: '^======'
-      scope: acejump.label.blue
+      scope: punctuation.definition.heading.dokuwiki
       push:
-        - meta_scope: acejump.label.blue
+        - meta_scope: markup.heading.1.dokuwiki
         - match: '======'
+          scope: punctuation.definition.heading.dokuwiki
           pop: true
         - match: '.'
-          scope: acejump.label.blue
+          scope: markup.heading.1.dokuwiki
 
     # Headings    
     - match: '^=+'
-      scope: acejump.label.orange
+      scope: punctuation.definition.heading.dokuwiki
       push:
-        - meta_scope: acejump.label.orange
+        - meta_scope: markup.heading.2.dokuwiki
         - match: '=+'
+          scope: punctuation.definition.heading.dokuwiki
           pop: true
         - match: '.'
-          scope: acejump.label.orange
+          scope: markup.heading.2.dokuwiki
 
     # Formatted Bold text    
     - match: '\*\*'
@@ -143,7 +145,3 @@ contexts:
             - include: main
         - match: '.'
           scope: string.quoted.single.html
-
-
-
-
